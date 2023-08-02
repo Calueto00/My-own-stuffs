@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eventos APP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+     rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+     crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+     <link rel="stylesheet" href="/styles/style.css">
+  </head>
+  <body>
+       <header class="">
+        <div class="wrapper">
+            <h1>Detalhe do Evento</h1>
+        <a th:href="@{/evento/listar}" class="btn btn-dark">
+            <i class="fa fa-users-viewfinder">Lista de Eventos</i>
+        </a>
+        </div>
+       </header>
+
+
+       <div class="container cover" th:each="evento : ${evento}">
+            <div class="take">
+                <h5>Nome do Evento : </h5><h5><span th:text="${evento.nome}"></span></h5>
+            </div>
+            <div class="take">
+                <h5>Local do Evento : </h5><h5><span th:text="${evento.local}"></span></h5>
+            </div>
+            <div class="take">
+                <h5>Data do Evento : </h5><h5><span th:text="${evento.data}"></span></h5>
+            </div>
+            <div class="take">
+                <h5>Horario do Evento : </h5><h5><span th:text="${evento.horario}"></span></h5>
+            </div>
+        
+       </div>
+       <div class="container text-center">
+        <h2>Adicionar Convidado</h2>
+       </div>
+       <div class="container" >
+        <form th:action="@{/evento/detalhe/{id}(id=${evento.id})}" method="post" th:Object="${convidado}">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" value="Ensira nome do Convidado" th:field="*{nome}">
+                <div>
+                    <span style="color: red;" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="nome">Email:</label>
+                <input type="email" id="email" class="form-control" value="Ensira email do Convidado" th:field="*{email}">
+                <div>
+                    <span style="color: red;" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-dark">Adicionar Convidado</button>
+        </form>
+       </div>
+       <div class="container">
+        <br>
+        <h6 class="text-center">Lista de Convidados</h6>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="convid : ${convidEvento}">
+                    <td>
+                        <span th:text="${convid.id}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${convid.nome}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${convid.email}"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+       </div>
+       
+
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
+       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
+       crossorigin="anonymous"></script>
+     </body>
+ </html>

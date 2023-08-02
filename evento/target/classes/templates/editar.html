@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eventos APP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+     rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+     crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+     <link rel="stylesheet" href="/styles/style.css">
+  </head>
+  <body>
+       <header class="">
+        <div class="wrapper">
+            <h1>Alterar Eventos</h1>
+        <a th:href="@{/evento/listar}" class="btn btn-dark">
+            <i class="fa fa-users-viewfinder"> Lista de Eventos</i>
+        </a>
+        </div>
+       </header>
+       <div class="container">
+        <span th:text="${mensagem}"></span>
+       </div>
+
+        <form th:action="@{/evento/listar/editar/{id}(id=${evento.id})}" method="post" class="container" th:Object="${evento}">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" th:field="*{nome}">
+                <div>
+                    <span style="color:red"; th:if="${#fields.hasErrors('nome')}"  th:errors="*{nome}"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="local">Location:</label>
+                <input type="text" class="form-control" id="local" name="local" th:field="*{local}">
+                <div>
+                    <span style="color:red"; th:if="${#fields.hasErrors('local')}"  th:errors="*{local}"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col sm-2">
+                    <label for="data">Data</label>
+                    <input type="date" id="data" class="form-control" th:field="*{data}">
+                    <div>
+                        <span style="color:red"; th:if="${#fields.hasErrors('data')}"  th:errors="*{data}"></span>
+                    </div>
+                </div>
+                <div class="col sm-2">
+                    <label for="data">Horario</label>
+                    <input type="time" id="data" class="form-control" th:field="*{horario}">
+                </div>
+                <div>
+                    <span style="color:red"; th:if="${#fields.hasErrors('horario')}"  th:errors="*{horario}"></span>
+                </div>
+            </div>
+            <br>
+
+            <button type="submit" class="btn btn-dark">Alterar Evento</button>
+            <br>
+            <br>
+        </form>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
+    crossorigin="anonymous"></script>
+  </body>
+</html>
